@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CinéBook — Book Movie Tickets Online</title>
+  <meta name="description" content="Book movie tickets online at the best cinemas. Enjoy the latest blockbusters with the best seats, best prices.">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body data-page="home">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">Ciné<span>Book</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="my-bookings.html">My Bookings</a>
+      </div>
+      <div class="nav-actions">
+        <a href="movies.html" class="nav-search-btn" title="Search movies">🔍</a>
+        <a href="my-bookings.html" class="nav-bookings-btn">🎫 My Tickets</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container" style="position:relative;z-index:2;">
+      <div class="hero-content">
+        <div class="hero-badge">🎬 Mumbai's #1 Ticket Platform</div>
+        <h1 class="hero-title">
+          Experience Movies<br><span class="gradient-text">Like Never Before</span>
+        </h1>
+        <p class="hero-subtitle">
+          Book tickets for the latest blockbusters at premium cinemas across Mumbai. IMAX, 3D, VIP seats — all in one place.
+        </p>
+        <div class="search-bar" style="margin-bottom:2rem">
+          <input type="text" id="heroSearch" placeholder="Search movies, genres, directors…" autocomplete="off">
+          <button id="heroSearchBtn">Search 🔍</button>
+        </div>
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-value">50+</span>
+            <span class="stat-label">Now Showing</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">4</span>
+            <span class="stat-label">Premium Cinemas</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">₹200</span>
+            <span class="stat-label">Starting Price</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">IMAX</span>
+            <span class="stat-label">Available</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating movie posters (decorative) -->
+    <div style="position:absolute;right:0;top:0;bottom:0;width:45%;display:flex;align-items:center;justify-content:center;z-index:1;pointer-events:none;overflow:hidden;" class="hero-visual">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;transform:rotate(-5deg) scale(0.9);opacity:0.6;margin-top:4rem;">
+        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=220&h=330&fit=crop" style="border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6);" alt="">
+        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=220&h=330&fit=crop" style="border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6);margin-top:32px;" alt="">
+        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=220&h=330&fit=crop" style="border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6);margin-top:-16px;" alt="">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=220&h=330&fit=crop" style="border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6);margin-top:16px;" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- Now Showing -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Now <span>Showing</span></h2>
+        <a href="movies.html" class="section-link">View All →</a>
+      </div>
+      <div id="nowShowingGrid" class="movies-grid"></div>
+    </div>
+  </section>
+
+  <!-- Coming Soon -->
+  <section class="section" style="background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary)); padding: 3rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Coming <span>Soon</span></h2>
+        <a href="movies.html" class="section-link">See All →</a>
+      </div>
+      <div id="comingSoonScroll" class="movies-scroll"></div>
+    </div>
+  </section>
+
+  <!-- Features Strip -->
+  <section class="section-sm">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem">🎭</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.5rem">All Genres</h3>
+          <p style="color:var(--text-secondary);font-size:0.875rem">Action, Drama, Sci-Fi, Horror and more</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem">🪑</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.5rem">Choose Your Seat</h3>
+          <p style="color:var(--text-secondary);font-size:0.875rem">VIP, Premium & Standard options available</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem">⚡</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.5rem">Instant Booking</h3>
+          <p style="color:var(--text-secondary);font-size:0.875rem">Confirm in seconds, ticket delivered instantly</p>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem">🔒</div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.5rem">Secure Payment</h3>
+          <p style="color:var(--text-secondary);font-size:0.875rem">End-to-end encrypted checkout</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="nav-logo" style="margin-bottom:0.5rem">
+            <div class="logo-icon">🎬</div>
+            <div class="logo-text">Ciné<span>Book</span></div>
+          </div>
+          <p class="footer-text">The premium way to book movie tickets.</p>
+        </div>
+        <div class="footer-links">
+          <a href="movies.html">Movies</a>
+          <a href="my-bookings.html">My Bookings</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;">
+        <p class="footer-text">© 2026 CinéBook. Made with ❤️ for movie lovers.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed — CinéBook</title>
+    <meta name="description" content="Your movie ticket booking is confirmed. Enjoy the show!">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <style>
+        @media print {
+
+            /* ── Page setup: A4, single page, no margins ── */
+            @page {
+                size: A4 portrait;
+                margin: 12mm 15mm;
+            }
+
+            /* ── Hide everything except the ticket ── */
+            .navbar,
+            footer,
+            .no-print,
+            .confirmation-hero {
+                display: none !important;
+            }
+
+            /* ── Reset body for print ── */
+            html,
+            body {
+                background: #fff !important;
+                color: #111 !important;
+                font-size: 12pt !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                height: auto !important;
+            }
+
+            /* ── Remove page padding ── */
+            body>div {
+                padding-top: 0 !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+
+            /* ── Ticket card: full width, no shadow, fits one page ── */
+            .ticket-card {
+                border: 2px solid #222 !important;
+                box-shadow: none !important;
+                border-radius: 8pt !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+            }
+
+            /* ── Ticket header: dark bg prints correctly ── */
+            .ticket-header {
+                background: #1a1a2e !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color: #fff !important;
+                padding: 16pt !important;
+            }
+
+            .ticket-movie {
+                font-size: 18pt !important;
+                font-weight: 900 !important;
+                color: #fff !important;
+            }
+
+            .ticket-badge {
+                background: rgba(34, 197, 94, 0.2) !important;
+                border: 1px solid rgba(34, 197, 94, 0.5) !important;
+                color: #22c55e !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                padding: 3pt 10pt !important;
+                border-radius: 20pt !important;
+                font-size: 9pt !important;
+                font-weight: 700 !important;
+            }
+
+            /* ── QR code ── */
+            .qr-wrapper {
+                background: #fff !important;
+                border-radius: 6pt !important;
+                padding: 8pt !important;
+                width: 90pt !important;
+                height: 90pt !important;
+                margin: 8pt auto !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* ── Booking ID ── */
+            .booking-id-display {
+                font-size: 11pt !important;
+                letter-spacing: 2pt !important;
+                color: #c9a210 !important;
+                border: 1px dashed #c9a210 !important;
+                background: rgba(245, 197, 24, 0.08) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                padding: 4pt 8pt !important;
+                border-radius: 4pt !important;
+                margin-top: 6pt !important;
+                text-align: center !important;
+            }
+
+            /* ── Ticket body ── */
+            .ticket-body {
+                padding: 12pt !important;
+            }
+
+            .ticket-detail-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 10pt !important;
+            }
+
+            .ticket-detail-label {
+                font-size: 7pt !important;
+                color: #666 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.5pt !important;
+            }
+
+            .ticket-detail-value {
+                font-size: 10pt !important;
+                font-weight: 700 !important;
+                color: #111 !important;
+            }
+
+            /* ── Total amount ── */
+            #confirmTotal {
+                color: #c9a210 !important;
+                font-size: 16pt !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* ── Divider ── */
+            div[style*="height:1px"] {
+                background: #ddd !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* ── Branding ── */
+            .logo-text span,
+            span[style*="color:var(--gold)"] {
+                color: #c9a210 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body data-page="confirmation">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">🎬</div>
+                <div class="logo-text">Ciné<span>Book</span></div>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="movies.html">Movies</a>
+                <a href="my-bookings.html">My Bookings</a>
+            </div>
+            <div class="nav-actions">
+                <a href="my-bookings.html" class="nav-bookings-btn">🎫 My Tickets</a>
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding-top:var(--nav-height);">
+        <div class="container" style="max-width:680px;">
+
+            <!-- Success Header -->
+            <div class="confirmation-hero">
+                <div class="confirm-icon">✅</div>
+                <h1 style="font-size:2.25rem;font-weight:900;margin-bottom:0.5rem">Booking Confirmed!</h1>
+                <p style="color:var(--text-secondary);font-size:1.05rem">Your tickets are ready. See you at the show! 🍿
+                </p>
+                <div id="confirmBookingId" style="font-size:0.875rem;color:var(--text-muted);margin-top:0.5rem"></div>
+            </div>
+
+            <!-- Ticket Card -->
+            <div class="ticket-card">
+                <div class="ticket-header">
+                    <div class="ticket-movie" id="confirmMovie">—</div>
+                    <div style="margin-top:0.5rem">
+                        <span class="ticket-badge">✓ Confirmed</span>
+                    </div>
+
+                    <div class="qr-wrapper" title="QR Code (mock)">
+                        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;width:80px;height:80px;">
+                            <!-- Build a simple fake QR-like grid with JS -->
+                            <canvas id="qrCanvas" width="80" height="80"></canvas>
+                        </div>
+                    </div>
+                    <div class="booking-id-display" id="bookingIdDisplay">—</div>
+                </div>
+
+                <div class="ticket-body">
+                    <div class="ticket-detail-grid">
+                        <div class="ticket-detail">
+                            <span class="ticket-detail-label">Name</span>
+                            <span class="ticket-detail-value" id="confirmName">—</span>
+                        </div>
+                        <div class="ticket-detail">
+                            <span class="ticket-detail-label">Date</span>
+                            <span class="ticket-detail-value" id="confirmDate">—</span>
+                        </div>
+                        <div class="ticket-detail">
+                            <span class="ticket-detail-label">Showtime</span>
+                            <span class="ticket-detail-value" id="confirmTime">—</span>
+                        </div>
+                        <div class="ticket-detail">
+                            <span class="ticket-detail-label">Seats</span>
+                            <span class="ticket-detail-value" id="confirmSeats">—</span>
+                        </div>
+                        <div class="ticket-detail" style="grid-column:span 2">
+                            <span class="ticket-detail-label">Cinema</span>
+                            <span class="ticket-detail-value" id="confirmCinema">—</span>
+                        </div>
+                    </div>
+
+                    <div style="height:1px;background:var(--border);margin:var(--space-md) 0;"></div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <div>
+                            <div class="ticket-detail-label">Amount Paid</div>
+                            <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--gold)"
+                                id="confirmTotal">—</div>
+                        </div>
+                        <div style="text-align:right">
+                            <div class="ticket-detail-label">Powered by</div>
+                            <div style="font-family:var(--font-display);font-weight:800;font-size:1.1rem">Ciné<span
+                                    style="color:var(--gold)">Book</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="no-print"
+                style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:var(--space-2xl);">
+                <button id="printBtn" class="btn btn-outline btn-lg">🖨 Download / Print Ticket</button>
+                <a href="my-bookings.html" class="btn btn-ghost btn-lg">📋 View My Bookings</a>
+                <a href="index.html" class="btn btn-primary btn-lg">🎬 Book Another</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer no-print">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="nav-logo">
+                    <div class="logo-icon">🎬</div>
+                    <div class="logo-text">Ciné<span>Book</span></div>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="movies.html">Movies</a>
+                    <a href="my-bookings.html">My Bookings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Draw a simple fake QR on canvas
+        window.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById("qrCanvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, 80, 80);
+            ctx.fillStyle = "#111";
+            const cells = 12;
+            const size = 80 / cells;
+            const seed = Date.now();
+            for (let r = 0; r < cells; r++) {
+                for (let c = 0; c < cells; c++) {
+                    const val = Math.sin(seed + r * 13 + c * 7) > 0;
+                    if (val) ctx.fillRect(c * size, r * size, size - 1, size - 1);
+                }
+            }
+            // Corner markers
+            [[0, 0], [0, 9], [9, 0]].forEach(([r, c]) => {
+                ctx.fillStyle = "#111";
+                ctx.fillRect(c * size, r * size, 3 * size, 3 * size);
+                ctx.fillStyle = "white";
+                ctx.fillRect(c * size + size * 0.4, r * size + size * 0.4, size * 2.2, size * 2.2);
+                ctx.fillStyle = "#111";
+                ctx.fillRect(c * size + size * 0.8, r * size + size * 0.8, size * 1.4, size * 1.4);
+            });
+        });
+    </script>
+</body>
+
+</html>
